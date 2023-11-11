@@ -35,6 +35,10 @@
             var c = parseFloat(document.getElementById('c').value);
 
             var delta = b * b - 4 * a * c;
+            if(a==0 || b==0 || c==0){
+                document.getElementById('result').innerHTML = 'Phương Trình vô số nghiệm';
+
+            }else
 
             if (delta > 0) {
                 var x1 = (-b + Math.sqrt(delta)) / (2 * a);
