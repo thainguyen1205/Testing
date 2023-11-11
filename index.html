@@ -1,148 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Giải phuong trình bậc 2</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải phương trình bậc 2</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <h2>Giải phương trình bậc 2</h2>
+        <label for="a">Nhập hệ số a:</label>
+        <input type="text" id="a" placeholder="Nhập hệ số a" required>
 
-  <style>
-    .content {
-      border-radius: 15px;
-      border: 2px solid #000;
-      margin-top: 30px;
-    }
+        <label for="b">Nhập hệ số b:</label>
+        <input type="text" id="b" placeholder="Nhập hệ số b" required>
 
-    h2 {
-      text-align: center;
-    }
+        <label for="c">Nhập hệ số c:</label>
+        <input type="text" id="c" placeholder="Nhập hệ số c" required>
 
-    h3 {
-      margin: 20px 0;
-    }
+        <button onclick="solveQuadratic()">Giải</button>
+        <button onclick="clean()"> Clean</button>
 
-    .result {
-      min-height: 250px;
-      border: 1px solid #000;
-      border-radius: 15px;
-      background: lightblue;
-    }
-  </style>
+        <p id="result"></p>
 
-  <body>
-    <div class="container">
-      <div class="content">
-        <div class="row">
-          <h2>Giải Phương trình bậc 2: Ax^2+Bx+C=0</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <form class="form-control">
-              <label for="">Nhập A</label>
-              <input
-                type="text"
-                id="soA"
-                class="form-control"
-                value="controlA"
-                placeholder="Nhập số A..."
-              />
-
-              <label for="">Nhập B</label>
-              <input
-                type="text"
-                id="soB"
-                value="controlB"
-                class="form-control"
-                placeholder="Nhập số B..."
-              />
-
-              <label for="">Nhập C</label>
-              <input
-                type="text"
-                id="soC"
-                value="controlC"
-                class="form-control"
-                placeholder="Nhập số C..."
-              />
-              <br />
-
-              <input
-                onclick="gptt();"
-                class="btn btn-success"
-                value="Giải phương trình"
-              />
-
-              <input onclick="cleam()" class="btn btn-success" value="Clean"/>
-            </form>
-          </div>
-
-          <div class="col-md-6">
-            <div class="result">
-              <h3>Kết quả</h3>
-              <p id="result"></p>
-              <p id="result1"></p>
-              <p id="result2"></p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </body>
-</html>
 
-<script>
-  
-  function gptt() {
-    let a = document.getElementById("soA").value;
-    let b = document.getElementById("soB").value;
-    let c = document.getElementById("soC").value;
-    if (a == 0) {
-      if (b == 0) {
-        document.getElementById("result").innerHTML = "Phương trình vô nghiệm";
-      } else {
-        x = -c / b;
-        document.getElementById("result").innerHTML =
-          "Phương trình có 1 nghiệm duy nhất X= " + x;
-      }
-    } 
-    else {
-      let delta = b * b - 4 * a * c;
-      if (delta == 0) {
-        x = -b / (2*a);
-        document.getElementById("result").innerHTML =
-          "Phương trình có nghiệm kép X1 = X2 = " + x;
-      }
+    <script>
+        function solveQuadratic() {
+            var a = parseFloat(document.getElementById('a').value);
+            var b = parseFloat(document.getElementById('b').value);
+            var c = parseFloat(document.getElementById('c').value);
 
-      if (delta > 0) {
-        let x1 = -b + Math.sqrt(delta) / (2 * a);
-        let x2 = -b - Math.sqrt(delta) / (2 * a);
+            var delta = b * b - 4 * a * c;
 
-        document.getElementById("result").innerHTML =
-          "Phương trình có 2 nghiệm phân biệt: </br>";
-        document.getElementById("result1").innerHTML = "X1 = " + x1 + "<br>";
-        document.getElementById("result2").innerHTML = "X2 = " + x2;
-      } 
+            if (delta > 0) {
+                var x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                var x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                document.getElementById('result').innerHTML = 'Phương trình có 2 nghiệm: x1 = ' + x1 + ', x2 = ' + x2;
+            } else if (delta === 0) {
+                var x = -b / (2 * a);
+                document.getElementById('result').innerHTML = 'Phương trình có nghiệm kép: x = ' + x;
+            } else {
+                document.getElementById('result').innerHTML = 'Phương trình vô nghiệm';
+            }
+        }
 
-      else {
-        document.getElementById("result").innerHTML = "Phương trình vô nghiệm";
-      }
-    }
-  }
-
-    function cleam(){
-        let a = document.getElementById('soA').value = "";
-        let b = document.getElementById('soB').value = "";
-        let c = document.getElementById('soC').value = "";
+        function clean(){
+        var a = document.getElementById('a').value = "";
+        var b = document.getElementById('b').value = "";
+        var c = document.getElementById('c').value = "";
         
         document.getElementById('result').innerHTML = "";
-        document.getElementById('result1').innerHTML = "";
-        document.getElementById('result2').innerHTML = "";
+        
     }
-</script>
+    </script>
+</body>
+</html>
