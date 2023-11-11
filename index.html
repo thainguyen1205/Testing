@@ -46,6 +46,12 @@
             } else {
                 document.getElementById('result').innerHTML = 'Phương trình vô nghiệm';
             }
+            var WebDriverWait = require('webdriverwait');
+            var driver = new WebDriverWait(yourDriver, 5000);
+
+            // Chờ cho đến khi phần tử có ID 'a' xuất hiện
+            var elementA = driver.wait(until.elementLocated(By.id('a')), 5000);
+
         }
 
         function clean(){
